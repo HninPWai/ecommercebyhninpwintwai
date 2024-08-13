@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "637588243550",
+    "project_id": "ecommerce-by-hnin-pwint-wai",
+    "storage_bucket": "ecommerce-by-hnin-pwint-wai.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637588243550:android:5e7b8d2e1b8314f8baa0cf",
+        "android_client_info": {
+          "package_name": "com.example.ecommercebyhninpwintwai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl1SoBhZEHwvoX5LGFtYPYUp5TZyiKoFw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
