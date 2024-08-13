@@ -13,17 +13,11 @@ class ProductList extends StatelessWidget {
       itemCount: products.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 1,
-        childAspectRatio: 3 / 4,
+        childAspectRatio: 3 / 2,
       ),
       itemBuilder: (context, index) {
         return ProductItemView(product: products[index]);
       },
     );
-    // return ListView.builder(
-    //   itemCount: products.length,
-    //   itemBuilder: (context, index) {
-    //     return ProductItemView(product: products[index]);
-    //   },
-    // );
   }
 }

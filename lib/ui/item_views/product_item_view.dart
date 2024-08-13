@@ -11,7 +11,7 @@ class ProductItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (product == null) {
-      return const SizedBox(); // Return an empty widget if product is null
+      return const SizedBox();
     }
 
     return GestureDetector(
@@ -71,21 +71,29 @@ class ProductItemView extends StatelessWidget {
             const SizedBox(height: 5),
             Row(
               children: [
-                Text(
-                  product!.name ?? 'Unknown',
-                  style: const TextStyle(fontSize: 16),
+                Expanded(
+                  child: Text(
+                    product!.name ?? 'Unknown',
+                    style: const TextStyle(fontSize: 16),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
-                Align(
-                  alignment: Alignment.bottomRight,
+                Container(
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.black,
+                  ),
                   child: IconButton(
-                    icon: const Icon(Icons.add_shopping_cart),
+                    icon: const Icon(Icons.add_shopping_cart, color: Colors.white),
                     onPressed: () {
                       Fluttertoast.showToast(msg: 'Adding to the shopping cart.');
                     },
                   ),
                 ),
               ],
-            ),
+            )
+
 
           ],
         ),

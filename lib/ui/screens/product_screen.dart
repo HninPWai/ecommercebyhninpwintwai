@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../constants/app_constants.dart';
 import '../../data/vos/product_vo.dart';
 import '../../network/data_agent/firebase_data_agent.dart';
 import '../widgets/product_grid.dart';
@@ -18,47 +19,37 @@ class _ProductScreenState extends State<ProductScreen> {
   bool isGridView = false;
   String searchQuery = '';
   final List<String> brandLogos = [
-    'assets/nike.jpeg',
-    'assets/adidas.png',
-    'assets/puma.jpg',
-    'assets/underarmour.png',
-    'assets/newbalance.png'
+    'assets/images/nike.jpeg',
+    'assets/images/adidas.png',
+    'assets/images/puma.jpg',
+    'assets/images/underarmour.png',
+    'assets/images/newbalance.png'
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
 
-          onChanged: (value) {
-            setState(() {
-              searchQuery = value;
-            });
-          },
-          decoration: const InputDecoration(
-            hintText: 'Search',
-            prefixIcon: Icon(Icons.search),
-            border: InputBorder.none,
-          ),
-        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_bag),
             onPressed: () {
               Fluttertoast.showToast(msg: 'Clicked the shopping cart.');
             },
           ),
         ],
       ),
+      drawer: const NavigationDrawer(children: [],
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.only(left: 10.0,right: 10.0,bottom: 10.0),
         child: Column(
           children: [
             /// Search
             Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: Colors.grey[100],
                 borderRadius: BorderRadius.circular(30.0),
               ),
               child: const TextField(
@@ -93,7 +84,7 @@ class _ProductScreenState extends State<ProductScreen> {
             ),
             Row(
               children: [
-                const Text('Popular'),
+                const Text('Popular',style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),),
                 const Spacer(),
                 IconButton(
                   icon: Icon(isGridView ? Icons.list : Icons.grid_view),
@@ -132,10 +123,14 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: 2,
+        selectedItemColor: AppConstants.primaryColor,
+        unselectedItemColor: Colors.grey,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favorites'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: ''),
         ],
       ),
     );
