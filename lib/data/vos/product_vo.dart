@@ -6,6 +6,9 @@ class ProductVO {
   final String imageUrl;
   final String price;
   final String rating;
+  final String description;
+  final String category;
+  final String deliveryNote;
 
   ProductVO({
     required this.id,
@@ -13,6 +16,9 @@ class ProductVO {
     required this.imageUrl,
     required this.price,
     required this.rating,
+    required this.description,
+    required this.category,
+    required this.deliveryNote,
   });
 
   factory ProductVO.fromModel(ProductModel model) {
@@ -22,6 +28,9 @@ class ProductVO {
       imageUrl: model.imageUrl,
       price: model.price,
       rating: model.rating,
+      description: model.description,
+      category: model.category,
+      deliveryNote: model.deliveryNote,
     );
   }
 }

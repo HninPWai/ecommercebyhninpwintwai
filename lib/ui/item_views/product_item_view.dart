@@ -3,14 +3,22 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../data/vos/product_vo.dart';
 import '../screens/product_detail_screen.dart';
 
-class ProductItemView extends StatelessWidget {
+class ProductItemView extends StatefulWidget {
+  const ProductItemView({super.key,required this.product});
+
   final ProductVO? product;
 
-  ProductItemView({required this.product});
+  @override
+  _ProductItemViewState createState() => _ProductItemViewState();
+}
+
+class _ProductItemViewState extends State<ProductItemView> {
+
+  bool isFavorite = true;
 
   @override
   Widget build(BuildContext context) {
-    if (product == null) {
+    if (widget.product == null) {
       return const SizedBox();
     }
 
@@ -20,9 +28,13 @@ class ProductItemView extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => ProductDetailScreen(
-              productName: product!.name ?? 'Unknown',
-              price: product!.price ?? 'Unknown',
-              imageUrl: product!.imageUrl ?? '',
+              productName: widget.product!.name ?? 'Unknown',
+              price: widget.product!.price ?? 'Unknown',
+              imageUrl: widget.product!.imageUrl ?? '',
+              rating: widget.product!.rating ?? '',
+              description: widget.product!.description ?? '',
+              category: widget.product!.category ?? '',
+              deliveryNote: widget.product!.deliveryNote ?? '',
             ),
           ),
         );
@@ -32,33 +44,45 @@ class ProductItemView extends StatelessWidget {
           borderRadius: BorderRadius.circular(15),
         ),
         elevation: 5,
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
-                Center(
-                  child: product!.imageUrl != null
-                      ? Image.network(
-                    product!.imageUrl!,
-                    height: 150,
-                    fit: BoxFit.cover,
-                  )
-                      : const SizedBox(),
-                ),
-                const Positioned(
-                  top: 10,
-                  right: 10,
-                  child: Icon(
-                    Icons.favorite_border,
-                    color: Colors.red,
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: Center(
+                    child: widget.product!.imageUrl != null
+                        ? Image.network(
+                      widget.product!.imageUrl!,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    )
+                        : const SizedBox(),
                   ),
                 ),
                 Positioned(
                   top: 10,
+                  right: 10,
+                  child: IconButton(
+                    icon: Icon(
+                      isFavorite ? Icons.favorite : Icons.favorite_border,
+                      color: Colors.orange,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isFavorite = !isFavorite;
+                      });
+                    },
+                  ),
+                ),
+
+                Positioned(
+                  top: 10,
                   left: 10,
                   child: Text(
-                    product!.price ?? 'Unknown',
+                    widget.product!.price ?? 'Unknown',
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -69,29 +93,32 @@ class ProductItemView extends StatelessWidget {
             ),
 
             const SizedBox(height: 5),
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    product!.name ?? 'Unknown',
-                    style: const TextStyle(fontSize: 16),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.product!.name ?? 'Unknown',
+                      style: const TextStyle(fontSize: 16),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                   ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
+                  Container(
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black,
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.add_shopping_cart, color: Colors.white),
+                      onPressed: () {
+                        Fluttertoast.showToast(msg: 'Adding to the shopping cart.');
+                      },
+                    ),
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.add_shopping_cart, color: Colors.white),
-                    onPressed: () {
-                      Fluttertoast.showToast(msg: 'Adding to the shopping cart.');
-                    },
-                  ),
-                ),
-              ],
+                ],
+              ),
             )
 
 

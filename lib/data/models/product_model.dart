@@ -4,6 +4,9 @@ class ProductModel {
   final String imageUrl;
   final String price;
   final String rating;
+  final String description;
+  final String category;
+  final String deliveryNote;
 
   ProductModel({
     required this.id,
@@ -11,6 +14,9 @@ class ProductModel {
     required this.imageUrl,
     required this.price,
     required this.rating,
+    required this.description,
+    required this.category,
+    required this.deliveryNote,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
@@ -20,6 +26,9 @@ class ProductModel {
       imageUrl: map['imageUrl'] ?? '',
       price: map['price'] ?? '',
       rating: map['rating'] ?? '',
+      description: map['description'] ?? '',
+      category: map['category'] ?? '',
+      deliveryNote: map['deliveryNote'] ?? '',
     );
   }
 }

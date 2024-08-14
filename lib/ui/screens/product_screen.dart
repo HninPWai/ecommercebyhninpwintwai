@@ -33,7 +33,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_bag),
+            icon: const Icon(Icons.shopping_bag_outlined),
             onPressed: () {
               Fluttertoast.showToast(msg: 'Clicked the shopping cart.');
             },
@@ -64,7 +64,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
             CarouselSlider(
               options: CarouselOptions(
-                height: 70.0,
+                height: 60.0,
                 enableInfiniteScroll: false,
                 viewportFraction: 0.3,
                 initialPage: 0,
@@ -87,7 +87,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 const Text('Popular',style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),),
                 const Spacer(),
                 IconButton(
-                  icon: Icon(isGridView ? Icons.list : Icons.grid_view),
+                  icon: Icon(isGridView ? Icons.grid_view : Icons.list),
                   onPressed: () {
                     setState(() {
                       isGridView = !isGridView;
@@ -129,8 +129,9 @@ class _ProductScreenState extends State<ProductScreen> {
         unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_bag_outlined), label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.search), label: ''),
         ],
       ),
     );
